@@ -1,0 +1,23 @@
+const express = require("express");
+const cors = require("cors");
+
+const { initDB } = require("./db/init");
+
+const projectRoutes = require("./routes/projectRoutes");
+const storyRoutes = require("./routes/storyRoutes");
+const taskRoutes = require("./routes/taskRoutes");
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+initDB();
+
+app.use("/api/projects", projectRoutes);
+app.use("/api/stories", storyRoutes);
+app.use("/api/tasks", taskRoutes);
+
+app.listen(5000, () => {
+  console.log("Server running on port 5000");
+});
